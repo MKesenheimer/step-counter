@@ -6,10 +6,10 @@ Build and flash the project:
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 make -j4
-make -j4 flash
+make flash
 ```
 
-## Program with Pico Probe
+## Flash with Pico Probe
 ```
 sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program step-counter.elf verify reset exit"
 ```

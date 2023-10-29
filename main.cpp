@@ -100,8 +100,8 @@ int main() {
     clock_t startTime = clock(), endTime;
     double measTime = 0;
     double charactFreq = 0;
-    const double moveThreshold = 100;
-    const double accThreshold = 12;
+    const double moveThreshold = 50;
+    const double accThreshold = 11;
     unsigned int steps = 0;
     unsigned int ds1 = 0;
     unsigned int ds2 = 0;
@@ -141,7 +141,7 @@ int main() {
 
         double aabs = std::pow(std::pow(ax, 2) + std::pow(ay, 2) + std::pow(az, 2), 0.5);
         
-        // 
+        // count a step if the acceleration is above a certain threshold
         if (!trigger && aabs >= accThreshold) {
             ds2++;
             trigger = true;
@@ -153,6 +153,7 @@ int main() {
         // store the acceleration data to later calculate the fourier transformation
         accbuf[counter++] = aabs;
 
+        // end of interval: do the calculation
         if (counter >= numberOfChannels) {
             endTime = clock();
             // measurement time of 'numberOfChannels'
@@ -188,10 +189,18 @@ int main() {
             if (maxv > moveThreshold && measTime > 0) {
                 ds1 = std::distance(accbuf.begin(), maxi);
                 charactFreq = ds1 / measTime;
-                steps += ds1;
             } else {
-                steps += ds2;
+                ds1 = 0;
                 charactFreq = 0;
+            }
+
+             if (std::abs<double>(ds1 - ds2) / ds1 < 0.1) {
+                // the step increments from the different algorithms differ not much
+                // -> the signal is periodically und the steps probably valid
+                steps += ds1;
+            } else if (ds2 < ds1) {
+                // the signal is not periodically
+                steps += ds2;
             }
 
 #ifdef DEBUG
