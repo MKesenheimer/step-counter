@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <time.h>
 #include "logo.hpp"
 #include "GFX.hpp"
 #include "pico/stdlib.h"

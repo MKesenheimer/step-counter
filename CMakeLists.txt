@@ -51,11 +51,11 @@ pico_add_extra_outputs(${CMAKE_PROJECT_NAME})
 add_custom_target(flash DEPENDS ${PROJECT_NAME}.elf)
 add_custom_command(TARGET flash
     USES_TERMINAL
-    COMMAND sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program ${PROJECT_NAME}.elf verify reset exit")
+    COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program ${PROJECT_NAME}.elf verify reset exit")
 
 # add debug target (make debug)
 #set(CMAKE_C_GDB ${GCC_PATH}/arm-none-eabi-gdb CACHE PATH "" FORCE)
 add_custom_target(debug DEPENDS ${PROJECT_NAME}.elf)
 add_custom_command(TARGET debug
     USES_TERMINAL
-    COMMAND xterm -e sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" &)
+    COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000")

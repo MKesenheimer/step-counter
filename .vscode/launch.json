@@ -14,7 +14,7 @@
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "miDebuggerPath": "/opt/local/bin/arm-none-eabi-gdb",
+            "miDebuggerPath": "/Applications/ARM/bin/arm-none-eabi-gdb",
             "MIMode": "gdb",
             "postRemoteConnectCommands": [
                 {
@@ -44,7 +44,7 @@
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "miDebuggerPath": "/opt/local/bin/arm-none-eabi-gdb",
+            "miDebuggerPath": "/Applications/ARM/bin/arm-none-eabi-gdb",
             "MIMode": "gdb",
             "debugServerPath": "/opt/local/bin/openocd",
             "debugServerArgs": "-f interface/cmsis-dap.cfg -f target/rp2040.cfg -c \"adapter speed 5000\"",
